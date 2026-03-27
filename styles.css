@@ -245,7 +245,7 @@ p { font-size: 1.125rem; color: var(--text-muted); }
 
 /* Professional Footer */
 .footer { background-color: #030712; padding: 6rem 0 2rem; border-top: 1px solid var(--border-glass); font-family: 'Inter', sans-serif; position: relative; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; margin-bottom: 5rem; }
 .brand-col p { font-size: 1rem; color: var(--text-faint); max-width: 320px; line-height: 1.7; }
 .logo-svg.footer-logo { width: 140px; height: auto; margin-bottom: 1.5rem; filter: none; }
 .footer-title { font-size: 1.05rem; color: #fff; margin-bottom: 1.5rem; letter-spacing: 0; }
@@ -331,34 +331,101 @@ p { font-size: 1.125rem; color: var(--text-muted); }
 .hero-cta-group { justify-content: flex-start; }
 .hero-title { font-size: clamp(2.8rem, 4vw, 4.5rem); text-align: left; margin-bottom: 1.5rem; }
 .hero-subtitle { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--text-muted); max-width: 750px; margin-bottom: 3rem; line-height: 1.6; text-wrap: balance; }
-.hero-visual { position: relative; width: 100%; height: 100%; min-height: 400px; perspective: 1000px; }
+/* Giant Hologram Icon */
+.hero-visual { position: relative; width: 100%; height: 100%; min-height: 450px; display: flex; align-items: center; justify-content: center; }
 
-/* CSS Mockup Dashboard */
-.mockup-card {
-  position: absolute; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px);
-  border: 1px solid var(--border-glass); border-top: 1px solid rgba(255,255,255,0.15);
-  border-radius: var(--radius-xl); box-shadow: 20px 30px 60px rgba(0,0,0,0.5);
-  padding: 1.5rem; color: #fff; transform-style: preserve-3d;
-  animation: floatMockup 6s ease-in-out infinite alternate;
+.hologram-container {
+  position: relative; width: 340px; height: 340px; display: flex; align-items: center; justify-content: center;
+  transform: perspective(1000px) rotateX(15deg);
+  animation: levitate 6s ease-in-out infinite alternate;
 }
-.mockup-main { width: 90%; right: 0; top: 10%; z-index: 2; transform: rotateY(-15deg) rotateX(5deg); }
-.mockup-secondary {
-  width: 75%; left: -10%; bottom: 10%; z-index: 3; background: rgba(14, 165, 233, 0.1);
-  transform: rotateY(-10deg) rotateX(10deg) translateZ(50px);
-  border: 1px solid rgba(14, 165, 233, 0.3); animation-delay: -3s;
+
+@keyframes levitate {
+  0% { transform: perspective(1000px) rotateX(15deg) translateY(0); }
+  100% { transform: perspective(1000px) rotateX(5deg) translateY(-25px); }
 }
-.mockup-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
-.mockup-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-blue); }
-.mockup-lines .line { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.1); margin-bottom: 0.75rem; }
-@keyframes floatMockup {
-  0% { transform: translateY(0) rotateY(-15deg) rotateX(5deg); }
-  100% { transform: translateY(-20px) rotateY(-10deg) rotateX(2deg); }
+
+.hologram-ring {
+  position: absolute; border-radius: 50%; border: 1px solid transparent;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2), inset 0 0 30px rgba(14, 165, 233, 0.2);
+  mix-blend-mode: screen;
+}
+
+.ring-1 {
+  width: 100%; height: 100%; border-width: 2px;
+  border-top-color: rgba(139, 92, 246, 0.8); border-bottom-color: rgba(14, 165, 233, 0.8);
+  animation: spinRing 12s linear infinite;
+}
+
+.ring-2 {
+  width: 80%; height: 80%; border-width: 2px;
+  border-left-color: rgba(16, 185, 129, 0.8); border-right-color: rgba(14, 165, 233, 0.8);
+  animation: spinRing 8s linear infinite reverse;
+}
+
+.ring-3 {
+  width: 60%; height: 60%;
+  border-top-color: rgba(255, 255, 255, 0.5); border-bottom-color: rgba(255, 255, 255, 0.5);
+  animation: spinRing 15s linear infinite; border-style: dashed;
+}
+
+@keyframes spinRing { 0% { transform: rotate(0deg) rotateX(20deg); } 100% { transform: rotate(360deg) rotateX(20deg); } }
+
+.hologram-core {
+  position: absolute; z-index: 5; display: flex; align-items: center; justify-content: center;
+  width: 160px; height: 160px; background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, transparent 70%);
+  border-radius: 50%; animation: pulseCore 3s infinite alternate;
+}
+
+.hologram-core i {
+  width: 100px; height: 100px; color: #a2ffe0;
+  filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.8)) drop-shadow(0 0 30px rgba(14, 165, 233, 0.6));
+}
+
+@keyframes pulseCore {
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.05); filter: brightness(1.3); }
+}
+
+/* Glass UI Satellites */
+.glass-card {
+  position: absolute; z-index: 10;
+  background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15); border-top: 1px solid rgba(255,255,255,0.3);
+  border-radius: 16px; padding: 1.15rem 1.5rem; display: flex; align-items: center; gap: 1rem;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 20px rgba(255,255,255,0.05);
+  transform-style: preserve-3d;
+}
+
+.sat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(14, 165, 233, 0.2); color: var(--brand-blue); border: 1px solid rgba(14,165,233,0.3); flex-shrink: 0; }
+.satellite-3 .sat-icon { background: rgba(16, 185, 129, 0.2); color: var(--brand-emerald); border-color: rgba(16,185,129,0.3); }
+
+.sat-text { display: flex; flex-direction: column; text-align: left; }
+.sat-text span { font-size: 0.75rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; }
+.sat-text strong { font-size: 1.05rem; color: #fff; line-height: 1.2; font-family: 'Plus Jakarta Sans', sans-serif;}
+
+.satellite-1 { top: -2%; right: -5%; animation: floatSat 5s infinite alternate ease-in-out; }
+.satellite-2 { bottom: 10%; right: -15%; animation: floatSat 7s infinite alternate-reverse ease-in-out; }
+.satellite-3 { bottom: -2%; left: -5%; animation: floatSat 8s infinite alternate ease-in-out; }
+.satellite-4 { top: 10%; left: -15%; animation: floatSat 6s infinite alternate-reverse ease-in-out; }
+
+@keyframes floatSat {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-20px) rotate(2deg); }
 }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .hero-split { grid-template-columns: 1fr; }
-  .hero-visual { display: none; }
+  .hero-visual { min-height: 600px; display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
+  .hologram-container { width: 220px; height: 220px; margin: 0 auto; z-index: 1;}
+  
+  /* Mobile Stacking for Satellites */
+  .glass-card { 
+    position: relative; top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
+    width: 100%; transform: scale(1) !important; margin: 0; animation: none; max-width: 400px; margin: 0 auto;
+  }
+  
   .hero-content { align-items: center; text-align: center; margin: 0 auto; }
   .hero-title { text-align: center; }
   .hero-cta-group { justify-content: center; }
