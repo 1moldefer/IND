@@ -417,37 +417,91 @@ p { font-size: 1.125rem; color: var(--text-muted); }
 /* Responsive adjustments */
 @media (max-width: 1024px) {
   .hero-split { grid-template-columns: 1fr; }
-  .hero-visual { min-height: 600px; display: flex; flex-direction: column; gap: 1.5rem; margin-top: 3rem; }
-  .hologram-container { width: 220px; height: 220px; margin: 0 auto; z-index: 1;}
+  .hero-visual { min-height: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; margin-top: 2rem; overflow: visible; }
+  .hologram-container { width: 200px; height: 200px; margin: 0 auto 1rem; z-index: 1; flex-shrink: 0; }
   
-  /* Mobile Stacking for Satellites */
+  /* Stacking for Satellites on Tablet */
   .glass-card { 
     position: relative; top: auto !important; bottom: auto !important; left: auto !important; right: auto !important;
-    width: 100%; transform: scale(1) !important; margin: 0; animation: none; max-width: 400px; margin: 0 auto;
+    width: 100%; max-width: 340px; margin: 0 auto;
+    animation: none !important; transform: none !important;
   }
   
-  .hero-content { align-items: center; text-align: center; margin: 0 auto; }
-  .hero-title { text-align: center; }
+  .hero-content { align-items: center; text-align: center; margin: 0 auto; max-width: 100%; }
+  .hero-title { text-align: center; font-size: clamp(2.2rem, 5vw, 3.5rem); }
+  .hero-subtitle { text-align: center; }
   .hero-cta-group { justify-content: center; }
   .split-layout { grid-template-columns: 1fr; gap: 3rem; }
   .contact-card { grid-template-columns: 1fr; }
-  .contact-left, .contact-right { padding: 4rem 3rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-left, .contact-right { padding: 3rem 2rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
 }
 
 @media (max-width: 768px) {
   .desktop-only { display: none; }
-  .menu-mobile-btn { display: block; }
-  .hero { padding: 0 0 4rem; text-align: left; }
-  .hero-container { padding-top: 80px; }
-  .hero-content { text-align: left; align-items: flex-start; }
-  .hero-title { font-size: 2.8rem; }
-  .hero-cta-group { flex-direction: column; width: 100%; }
-  .btn-lg { width: 100%; }
+  .menu-mobile-btn { display: flex; align-items: center; justify-content: center; }
+  
+  /* Hero Mobile */
+  .hero { padding: 0 0 3rem; }
+  .hero-content { text-align: center; align-items: center; padding-bottom: 1rem; }
+  .hero-title { font-size: clamp(2rem, 7vw, 2.8rem); text-align: center; margin-bottom: 1rem; }
+  .hero-subtitle { font-size: 1rem; margin-bottom: 2rem; }
+  .hero-cta-group { flex-direction: column; width: 100%; gap: 0.75rem; }
+  .btn-lg { width: 100%; padding: 1rem 1.5rem; font-size: 1rem; }
+  .pill-badge { font-size: 0.8rem; padding: 0.35rem 1rem; }
+  
+  /* Hologram smaller */
+  .hologram-container { width: 160px; height: 160px; }
+  .hologram-core { width: 100px; height: 100px; }
+  .hologram-core i { width: 60px; height: 60px; }
+  
+  /* Glass cards compact */
+  .glass-card { padding: 0.85rem 1.15rem; }
+  .sat-icon { width: 36px; height: 36px; }
+  .sat-text span { font-size: 0.65rem; }
+  .sat-text strong { font-size: 0.9rem; }
+  
+  /* Logo */
   .logo-svg-header { max-width: 85px; }
+  .navbar { height: 70px; }
+  .navbar.scrolled { height: 60px; }
+  
+  /* Sections */
+  .section { padding: 5rem 0; }
   .grid-4 { grid-template-columns: 1fr; }
-  .contact-left, .contact-right { padding: 3rem 1.5rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .feature-card { padding: 2rem 1.5rem; }
+  .mvw-card { padding: 2rem 1.5rem; }
+  .title { font-size: clamp(1.8rem, 5vw, 2.5rem); }
+  .subtitle { font-size: 0.8rem; }
+  .description { font-size: 1rem; }
+  .description-text { font-size: 0.95rem; }
+  .quote-card { padding: 1.25rem 1.5rem; }
+  .quote-card p { font-size: 0.95rem; }
+  
+  /* Contact */
+  .contact-left, .contact-right { padding: 2.5rem 1.5rem; }
+  .form-title { font-size: 1.4rem; }
+  .channel-item { padding: 0.75rem; margin-bottom: 1rem; }
+  .title-light { font-size: clamp(1.6rem, 4vw, 2rem); }
+  .desc-light { font-size: 1rem; }
+  
+  /* Footer */
+  .footer { padding: 4rem 0 2rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .footer-bottom { flex-direction: column; gap: 1.5rem; text-align: center; justify-content: center; }
-  .legal-links { flex-wrap: wrap; justify-content: center; }
+  .legal-links { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+  .logo-svg.footer-logo { width: 120px; }
+  
+  /* Floating WhatsApp smaller on mobile */
+  .wpp-float-btn { width: 52px; height: 52px; bottom: 1.25rem; right: 1.25rem; }
+  .wpp-float-btn svg { width: 26px; height: 26px; }
+}
+
+@media (max-width: 400px) {
+  .container { padding: 0 1rem; }
+  .hero-title { font-size: 1.8rem; }
+  .glass-card { padding: 0.75rem 1rem; gap: 0.75rem; }
+  .sat-icon { width: 32px; height: 32px; border-radius: 8px; }
+  .sat-text strong { font-size: 0.8rem; }
+  .contact-left, .contact-right { padding: 2rem 1.25rem; }
 }
